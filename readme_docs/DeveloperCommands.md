@@ -26,7 +26,7 @@
 ---
 # Git Commands:
 > - Add remote:
-> - $ git remote add origin ****.git
+> - $ git remote add origin https://github.com/er-ashissh/friends-media.git
 
 
 ---
@@ -79,25 +79,6 @@ CREATE DATABASE frds_media_db_v240807b;
 > - create super user
 > - $ python3 manage.py createsuperuser
 
-> - To dump data:
-> - $ python3 manage.py dumpdata --indent 4 > ../readme_docs/dumpdata/db_dump.json
-> - $ python3 manage.py dumpdata > ../readme_docs/dumpdata/db_dump.json
-> - $ python3 manage.py dumpdata core.LocationMaster --indent 2 > media/tmp/location_master_dump.json
-
-> - To load data:
-> - $ python manage.py loaddata ../readme_docs/dumpdata/db_dump.json
-
 > - To open Interactive Console / Terminal
 > - $ python3 manage.py shell
-
-> - Run python file of django from terminal
-> - $ python3 manage.py shell < core/management/commands/update_all_brands.py
-
-> - set URL globally
-> - $ ngrok http 8000
-
-> - collect static
-> - $ python3 manage.py collectstatic
-
-
 

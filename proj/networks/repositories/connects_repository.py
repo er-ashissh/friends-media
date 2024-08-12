@@ -22,6 +22,7 @@ class ConnectsRepository:
         status_code, status, msg, data = http_status.HTTP_400_BAD_REQUEST, ApiResponseStatus.ERROR, [
             'Invalid request!'], None
         result = []
+        token = request.token_payload
         _qry = request.GET.get("query", "")
         _page = int(request.GET.get("page", 1))
         _per_page = int(request.GET.get("per_page", 10))
@@ -31,16 +32,16 @@ class ConnectsRepository:
             Q(first_name=_qry) |
             Q(last_name=_qry) |
             Q(email__icontains=_qry)
-        )[_from:_to]
+        ).exclude(id=token.get("user_id"))[_from:_to]
         user_details_serializer = UserDetailsFriendsListSerializer(user_details_objs, many=True)
         result = user_details_serializer.data
         if result:
             status_code = http_status.HTTP_200_OK
             status = ApiResponseStatus.SUCCESS
-            msg = ['connects request send successfully.']
+            msg = ['friends list retrived successfully.']
             data = result
         else:
-            msg = ['connects request failed!!']
+            msg = ['friends list fetching process failed!!']
 
         return ApiResponse.api_status(status_code=status_code, status=status, message=msg, data=data)
 
@@ -83,7 +84,7 @@ class ConnectsRepository:
             msg = ['friends request list retrived successfully.']
             data = result
         else:
-            msg = ['friends request list retrived failed!!']
+            msg = ['friends request list fetching process failed!!']
 
         return ApiResponse.api_status(status_code=status_code, status=status, message=msg, data=data)
 
@@ -110,12 +111,12 @@ class ConnectsRepository:
         if result:
             status_code = http_status.HTTP_200_OK
             status = ApiResponseStatus.SUCCESS
-            msg = ['connects request send successfully.']
+            msg = ['connection request send successfully.']
             data = {
                 "connects_id": result.id,
             }
         else:
-            msg = ['connects request failed!!']
+            msg = ['connection request sending failed!!']
 
         return ApiResponse.api_status(status_code=status_code, status=status, message=msg, data=data)
 
@@ -145,8 +146,8 @@ class ConnectsRepository:
         if result:
             status_code = http_status.HTTP_200_OK
             status = ApiResponseStatus.SUCCESS
-            msg = ['connects action process successfully.']
+            msg = ['action on connects taken successfully.']
         else:
-            msg = ['connects action process failed!!']
+            msg = ['action on connects getting failed!!']
 
         return ApiResponse.api_status(status_code=status_code, status=status, message=msg, data=data)
