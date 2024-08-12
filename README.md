@@ -19,7 +19,7 @@ Social Media App
 
 ---
 ## Postman Collection:
-- link: https://api.postman.com/collections/5254947-d51c6c84-411a-4154-b59c-c165fb97a39e
+
 
 ---
 ## Demo API
